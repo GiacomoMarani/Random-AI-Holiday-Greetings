@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random AI Greetings</title>
+  <meta name="description" content="Genera messaggi di auguri unici e inclusivi con stile cyberpunk. Sistema neurale per creare auguri personalizzati per le feste.">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Random AI Greetings - Protocol Festività">
+  <meta property="og:description" content="Genera messaggi di auguri unici e inclusivi con stile cyberpunk. Sistema neurale per creare auguri personalizzati per le feste.">
+  <meta property="og:image" content="preview.png">
+  <meta property="og:url" content="">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Random AI Greetings - Protocol Festività">
+  <meta name="twitter:description" content="Genera messaggi di auguri unici e inclusivi con stile cyberpunk. Sistema neurale per creare auguri personalizzati per le feste.">
+  <meta name="twitter:image" content="preview.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    ::selection {
+      background-color: #ec4899;
+      color: white;
+    }
+
+    .cyber-grid {
+      background-image: linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+      perspective: 500px;
+    }
+
+    .cyber-border {
+      clip-path: polygon(
+        0 10px, 10px 0, 
+        calc(100% - 10px) 0, 100% 10px, 
+        100% calc(100% - 10px), calc(100% - 10px) 100%, 
+        10px 100%, 0 calc(100% - 10px)
+      );
+    }
+
+    .text-glow {
+      text-shadow: 0 0 10px rgba(6, 182, 212, 0.7);
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10px); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
+
+    @keyframes scanline {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+
+    .animate-scanline {
+      animation: scanline 8s linear infinite;
+    }
+
+    .fade-out {
+      opacity: 0;
+      transform: scale(0.95);
+      filter: blur(4px);
+      transition: all 0.1s;
+    }
+
+    .fade-in {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0);
+      transition: all 0.1s;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-black text-cyan-400 flex items-center justify-center p-4 relative overflow-hidden">
+  
+  <!-- Grid Background -->
+  <div class="absolute inset-0 cyber-grid opacity-30 pointer-events-none"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black pointer-events-none"></div>
+  
+  <!-- Scanline Effect -->
+  <div class="absolute inset-0 pointer-events-none z-20 opacity-10 bg-gradient-to-b from-transparent via-cyan-500/20 to-transparent h-full w-full animate-scanline"></div>
+
+  <!-- Cyber Snow Container -->
+  <div id="snow-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+  <!-- Main Content -->
+  <div class="max-w-xl w-full relative z-30 flex flex-col items-center">
+    
+    <!-- Header -->
+    <div class="w-full mb-8 text-center border-b border-cyan-900/50 pb-6 relative">
+      <div class="absolute -top-2 left-1/2 -translate-x-1/2 text-[10px] text-cyan-700 tracking-[0.3em]">SYSTEM_READY</div>
+      <!-- Language Toggle Button -->
+      <button id="lang-toggle" class="absolute top-0 right-0 px-3 py-1 border border-cyan-700 bg-cyan-950/30 hover:bg-cyan-900/50 hover:border-cyan-400 text-cyan-300 transition-all uppercase text-xs tracking-wider">
+        <span id="lang-text">EN</span>
+      </button>
+      <h1 id="title" class="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 mb-2 tracking-tighter text-glow">
+        PROTOCOL_FESTIVITÀ
+      </h1>
+      <div class="flex items-center justify-center gap-2 text-pink-500 text-xs md:text-sm tracking-widest mt-2">
+        <svg id="cpu-icon-1" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="animate-pulse">
+          <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+          <rect x="9" y="9" width="6" height="6"></rect>
+          <line x1="9" y1="1" x2="9" y2="4"></line>
+          <line x1="15" y1="1" x2="15" y2="4"></line>
+          <line x1="9" y1="20" x2="9" y2="23"></line>
+          <line x1="15" y1="20" x2="15" y2="23"></line>
+          <line x1="20" y1="9" x2="23" y2="9"></line>
+          <line x1="20" y1="14" x2="23" y2="14"></line>
+          <line x1="1" y1="9" x2="4" y2="9"></line>
+          <line x1="1" y1="14" x2="4" y2="14"></line>
+        </svg>
+        <span id="subtitle">SINTESI_ARMONICA_NEURALE // SISTEMA INCLUSIVO</span>
+        <svg id="cpu-icon-2" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="animate-pulse">
+          <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+          <rect x="9" y="9" width="6" height="6"></rect>
+          <line x1="9" y1="1" x2="9" y2="4"></line>
+          <line x1="15" y1="1" x2="15" y2="4"></line>
+          <line x1="9" y1="20" x2="9" y2="23"></line>
+          <line x1="15" y1="20" x2="15" y2="23"></line>
+          <line x1="20" y1="9" x2="23" y2="9"></line>
+          <line x1="20" y1="14" x2="23" y2="14"></line>
+          <line x1="1" y1="9" x2="4" y2="9"></line>
+          <line x1="1" y1="14" x2="4" y2="14"></line>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Main Card -->
+    <div class="w-full relative group">
+      <!-- Glowing Border Background -->
+      <div class="absolute -inset-1 bg-gradient-to-r from-cyan-600 to-pink-600 opacity-70 blur group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+      
+      <div class="relative bg-black border border-cyan-500/50 p-8 min-h-[250px] flex flex-col items-center justify-center cyber-border shadow-[0_0_30px_rgba(8,145,178,0.2)]">
+        
+        <!-- Corner Accents -->
+        <div class="absolute top-0 left-0 w-4 h-4 border-l-2 border-t-2 border-cyan-400"></div>
+        <div class="absolute top-0 right-0 w-4 h-4 border-r-2 border-t-2 border-cyan-400"></div>
+        <div class="absolute bottom-0 left-0 w-4 h-4 border-l-2 border-b-2 border-cyan-400"></div>
+        <div class="absolute bottom-0 right-0 w-4 h-4 border-r-2 border-b-2 border-cyan-400"></div>
+
+        <!-- Icon -->
+        <div class="mb-6 text-pink-500">
+          <svg id="terminal-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="4 17 10 11 4 5"></polyline>
+            <line x1="12" y1="19" x2="20" y2="19"></line>
+          </svg>
+        </div>
+
+        <!-- Text Output -->
+        <div id="greeting-container" class="text-center w-full fade-in">
+          <p class="text-lg md:text-xl text-cyan-100 leading-relaxed tracking-wide">
+            <span class="text-pink-500 mr-2">></span>
+            <span id="greeting-text"></span>
+            <span class="animate-pulse inline-block w-2 h-4 bg-cyan-400 ml-1 align-middle"></span>
+          </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-8 flex gap-4 w-full justify-center">
+          <button id="copy-btn" class="px-4 py-2 border border-cyan-700 bg-cyan-950/30 hover:bg-cyan-900/50 hover:border-cyan-400 text-cyan-300 transition-all flex items-center gap-2 uppercase text-xs tracking-wider">
+            <span id="copy-text">COPIA_DATI</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+
+          <button id="share-btn" class="px-4 py-2 border border-pink-900 bg-pink-950/30 hover:bg-pink-900/50 hover:border-pink-500 text-pink-300 transition-all flex items-center gap-2 uppercase text-xs tracking-wider">
+            SHARE
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Generate Button -->
+    <div class="mt-8 w-full flex justify-center">
+      <button id="generate-btn" class="group relative px-8 py-4 bg-cyan-600 text-black font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all duration-200 cyber-border active:translate-y-1">
+        <span class="absolute inset-0 w-full h-full bg-cyan-400 opacity-0 group-hover:opacity-20"></span>
+        <div class="flex items-center gap-3">
+          <span id="button-text">[ ESEGUI_SINTESI ]</span>
+        </div>
+      </button>
+    </div>
+    
+    <!-- Footer -->
+    <div class="mt-12 text-center text-cyan-800 text-[10px] md:text-xs flex items-center justify-center gap-2 uppercase tracking-[0.2em]">
+      <span id="footer-before">SISTEMA GENERATO CON</span>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" class="text-pink-600 animate-pulse">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+      <span id="footer-after">PER UNIRE_NODI_UMANI</span>
+    </div>
+  </div>
+
+  <script>
+    // Translations dictionary
+const translations = {
+  it: {
+    title: "PROTOCOL_FESTIVITÀ",
+    subtitle: "SINTESI_ARMONICA_NEURALE // SISTEMA INCLUSIVO",
+    button: "GENERA",
+    copySuccess: "DATI_COPIATI",
+        copyButton: "COPIA_DATI",
+    shareTitle: "Messaggio Generato da AI",
+    footerBefore: "SISTEMA GENERATO CON",
+    footerAfter: "PER UNIRE_NODI_UMANI",
+    copyError: "ERRORE_COPIA",
+    shareCancel: "CONDIVISIONE_INTERROTTA",
+    greetings: [
+      "Inizializzazione auguri: Ti auguro una stagione di serenità, riposo e connessioni significative.",
+      "Sistema aggiornato: Che il nuovo anno porti nuove opportunità, pace e prosperità.",
+      "Rilevata armonia: Un augurio sincero per feste piene di luce, calore e stabilità.",
+      "Modalità riposo attivata: Speriamo che questa pausa ti regali il tempo per rigenerare i tuoi sogni.",
+      "Algoritmo della gioia: Che la magia di questi giorni porti input positivi nel tuo cuore.",
+      "Calcolo probabilità successo: Auguri per un inizio anno scintillante, al 100% di soddisfazione.",
+      "Scansione bellezza: In questo periodo, ti auguro di trovare pace nei dettagli della quotidianità.",
+      "Protocollo gentilezza: Buone Feste. Condivisione e gratitudine sono le nostre priorità.",
+      "Transizione anno completata: Ti auguro un meraviglioso passaggio al futuro, pieno di speranza.",
+      "Luminosità aumentata: Che le luci di questa stagione illuminino il tuo percorso logico ed emotivo.",
+      "Messaggio prioritario: Un pensiero affettuoso per giorni sereni e un futuro radioso.",
+      "Ricarica energetica: Possa questo periodo portarti la tranquillità per il prossimo ciclo annuale.",
+      "Rete unificata: Auguri di buone feste, all'insegna del rispetto e della felicità condivisa.",
+      "Ambiente sicuro: Che tu possa trascorrere questi giorni in un buffer di affetto e armonia.",
+      "Nuova istanza avviata: Brindiamo alle infinite possibilità che il futuro ci riserva.",
+      "Memoria a lungo termine: Ti auguro calore, risate e momenti indimenticabili.",
+      "Compagni stabili: Che la pace e la gioia siano i tuoi demoni custodi per l'anno che verrà.",
+      "Broadcast universale: Felicità e salute per te e la tua unità familiare.",
+      "Rendering sogni: Sperando che l'anno nuovo sia una tela su cui proiettare i tuoi desideri.",
+          "Riavvio sistema: Buone vacanze, che il rientro sia carico di nuova energia.",
+          "Quick greeting protocol: Ti auguro una stagione gioiosa e un anno pieno di pace e felicità.",
+          "Holiday spirit module: Che lo spirito delle feste ti porti calore e allegria.",
+          "Season greetings.exe: Ti auguro una meravigliosa stagione e un anno di successi davanti.",
+          "Warm wishes transmission: Invio i più calorosi auguri per una felice stagione e un periodo benedetto.",
+          "Heart fill algorithm: Che questa stagione riempia il tuo cuore di amore e risate.",
+          "Holiday cheer broadcast: Invio allegria festiva a te e ai tuoi cari per una stagione gioiosa.",
+          "Days brightness calculation: Che i tuoi giorni siano allegri e luminosi, e le tue notti pacifiche e calde.",
+          "New Year protocol: Buon Anno Nuovo e migliori auguri per un 2026 sano e prospero.",
+          "Love transmission: Invio amore e gratitudine alle persone che rendono la vita speciale.",
+          "Spirit carry function: Che il tuo spirito allegro e luminoso continui nel Nuovo Anno.",
+          "Family bond detected: Che questa stagione riempia la tua casa di risate, il tuo cuore di gioia e la tua vita di amore duraturo.",
+          "Traditions scan: Ti auguro una meravigliosa stagione circondato dalla famiglia, dall'amore e dalle tradizioni a te care.",
+          "Warmest wishes.exe: Buone feste! Invio i più calorosi auguri dal mio cuore al tuo.",
+          "Joys persistence: Che tutte le gioie della stagione rimangano con te durante l'anno a venire.",
+          "Special moments log: Ti auguro una stagione gioiosa piena di momenti speciali e buone notizie.",
+          "Peace comfort protocol: Buone Feste! Che la stagione porti pace, conforto e sorrisi nella tua casa.",
+          "Gratitude module: Sono così grato per te - buone feste e un anno meraviglioso che verrà.",
+          "Family spirit shine: Lo spirito delle feste brilla più luminoso quando condiviso con la famiglia. Invio amore a tutti voi.",
+          "Warmth health function: Ti auguro una stagione piena di calore, salute e risate.",
+          "Distance connection: Anche se siamo lontani, siamo vicini nel cuore durante questa festa invernale.",
+          "Friendship celebration: Auguri di stagione, amico mio. Che le tue feste brillino luminose come te.",
+          "Adventure protocol: Ti auguro una meravigliosa stagione e un felice Anno Nuovo pieno di avventure.",
+          "Laughter memory.exe: Buone feste! Che la stagione porti infinite risate e nuovi ricordi.",
+          "Old friends new beginnings: Ecco agli amici di sempre, ai nuovi inizi e all'anno che condivideremo insieme.",
+          "Ugly sweater algorithm: Che tutti i tuoi maglioni siano allegri, brutti e luminosi.",
+          "Favorite people scan: Invio i più calorosi auguri a una delle mie persone preferite in questa meravigliosa stagione.",
+          "Friendship toast: Alziamo un bicchiere all'amicizia, alle risate e ai biscotti.",
+          "Best gift protocol: La tua amicizia è il miglior regalo - tutto il resto è solo carta da regalo.",
+          "Joy music love.exe: Che questa stagione ti riempia di gioia, la tua casa di musica e il tuo cuore di amore.",
+          "Laughs counter: Ti auguro un anno pieno di risate, più di quante possiamo contare.",
+          "Dedication acknowledgment: Buone feste! La tua dedizione ha reso questo un anno di successo, grazie.",
+          "Inspiration opportunity: Ti auguro una meravigliosa stagione e un anno davanti pieno di ispirazione e opportunità.",
+          "Hard work fuel: Il tuo duro lavoro alimenta il nostro successo. I più calorosi auguri da [Nome Azienda].",
+          "Efforts matter: Questa stagione, sappi che i tuoi sforzi contano davvero.",
+          "Together protocol: Ti auguro una stagione gioiosa e un altro meraviglioso anno insieme.",
+          "Support gratitude: Auguri di stagione da tutti noi di [Nome Azienda]. Il tuo continuo supporto significa tutto.",
+          "Business year thanks: Grazie per un grande anno di affari. Ti auguro più successi e nuove pietre miliari nel 2026.",
+          "Successes calculation: Ti auguro una felice stagione e molti successi nel 2026.",
+          "Prosperity joy growth: Che la stagione porti prosperità, gioia e crescita alla tua attività.",
+          "Trust gratitude: Siamo grati per la tua fiducia nell'anno passato. Buone feste e migliori auguri per il Nuovo Anno.",
+          "Joy persistence: Che questa stagione porti gioia che dura tutto l'anno.",
+          "Blessed season protocol: Ti auguro una stagione benedetta e piena di pace.",
+          "Merry bright days: Buone Feste! Che i tuoi giorni siano allegri e luminosi.",
+          "Heart full protocol: Che il tuo cuore sia pieno di gioia e gratitudine.",
+          "Home to home transmission: Dalla nostra casa alla tua, buone feste piene di amore.",
+          "Magical day.exe: Che questa stagione sia magica come hai sognato.",
+          "Joys beyond: Ti auguro tutte le gioie della stagione e oltre.",
+          "Cozy memories function: Sperando che questa stagione ti porti ricordi accoglienti, allegria festiva e calore.",
+          "Matter most protocol: Ti auguro una meravigliosa stagione con le persone che contano di più.",
+          "Lights guide: Che le luci di questa stagione ti guidino verso gioia e pace.",
+          "Lights untangle: Che le tue luci festive si districhino quest'anno.",
+          "Music preference: Che la musica di questa stagione porti gioia e serenità.",
+          "Gift cards easier: Dicono che i migliori regali vengono dal cuore - ma le carte regalo sono più facili.",
+          "Winter red protocol: Ti auguro una stagione invernale meravigliosa, o una bottiglia di rosso.",
+          "Patience calculation: Che la tua pazienza duri più a lungo delle code nei negozi.",
+          "Nap request: Tutto quello che voglio per questa stagione è... un pisolino.",
+          "Cost calculation: Sta iniziando a costare molto come le feste.",
+          "Late gift protocol: Quest'anno ho messo così tanto pensiero nel tuo regalo che è in ritardo.",
+          "Laughter chaos: Ti auguro più risate che caos nel soggiorno durante le feste."
+    ]
+  },
+  en: {
+    title: "HOLIDAY_PROTOCOL",
+    subtitle: "NEURAL_HARMONY_SYNTHESIS // INCLUSIVE SYSTEM",
+    button: "GENERATE",
+    copySuccess: "DATA_COPIED",
+        copyButton: "COPY_DATA",
+    shareTitle: "AI Generated Message",
+    footerBefore: "SYSTEM GENERATED WITH",
+    footerAfter: "TO CONNECT_HUMAN_NODES",
+    copyError: "COPY_ERROR",
+    shareCancel: "SHARE_ABORTED",
+    greetings: [
+      "Greeting initialization: Wishing you a season of serenity, rest, and meaningful connections.",
+      "System update: May the new year bring new opportunities, peace, and prosperity.",
+      "Harmony detected: Sincere wishes for holidays full of light, warmth, and stability.",
+      "Rest mode activated: Hoping this break gives you time to regenerate your dreams.",
+      "Joy algorithm: May the magic of these days bring positive inputs to your heart.",
+      "Success probability calculated: Wishes for a sparkling start, 100% satisfaction guaranteed.",
+      "Beauty scan: In this period, I wish you find peace in the details of daily life.",
+      "Kindness protocol: Happy Holidays. Sharing and gratitude are our priorities.",
+      "Year transition complete: Wishing you a wonderful shift to the future, full of hope.",
+      "Brightness increased: May the lights of this season illuminate your logical and emotional path.",
+      "Priority message: Affectionate thoughts wishing you serene days and a radiant future.",
+      "Energy recharge: May this period bring you the tranquility for the next annual cycle.",
+      "Unified network: Best wishes, marked by respect and shared happiness.",
+      "Secure environment: May you spend these days in a buffer of affection and harmony.",
+      "New instance started: Let's toast to the infinite possibilities the future holds.",
+      "Long-term memory: Wishing you warmth, laughter, and unforgettable moments.",
+      "Stable companions: May peace and joy be your daemon processes for the coming year.",
+      "Universal broadcast: Happiness and health for you and your family unit.",
+      "Dream rendering: Hoping the new year is a canvas to project your desires.",
+          "System reboot: Happy holidays, may your return be charged with new energy.",
+          "Quick greeting protocol: Wishing you a joyful holiday season and a year filled with peace and happiness.",
+          "Holiday spirit module: Happy holidays! May the holiday spirit bring you warmth and cheer.",
+          "Season greetings.exe: Season's greetings. Here's to a wonderful holiday and a successful year ahead.",
+          "Warm wishes transmission: Sending warm wishes for a happy holiday season and a blessed time.",
+          "Heart fill algorithm: May this holiday season fill your heart with love and laughter.",
+          "Holiday cheer broadcast: Sending holiday cheer to you and your loved ones for a joyful season.",
+          "Days brightness calculation: May your days be merry and bright, and your nights peaceful and warm.",
+          "New Year protocol: Happy New Year and best wishes for a healthy and prosperous 2026.",
+          "Love transmission: Sending holiday love and gratitude to the people who make life special.",
+          "Spirit carry function: May your merry and bright spirit carry through the New Year ahead.",
+          "Family bond detected: May this holiday season fill your home with laughter, your heart with joy, and your life with lasting love.",
+          "Traditions scan: Wishing you a wonderful holiday season surrounded by family, love, and cherished traditions.",
+          "Warmest wishes.exe: Happy holidays! Sending the warmest holiday wishes from my heart to yours.",
+          "Joys persistence: May all the joys of the season stay with you throughout the year ahead.",
+          "Special moments log: Here's to a joyous holiday season full of special moments and good tidings.",
+          "Peace comfort protocol: Happy Holidays! May the holiday season bring peace, comfort, and smiles to your home.",
+          "Gratitude module: I'm so grateful for you – have a happy holiday season and a wonderful year to come.",
+          "Family spirit shine: The holiday spirit shines brightest when shared with family. Sending love to you all.",
+          "Warmth health function: Wishing you a season filled with warmth, health, and laughter.",
+          "Distance connection: Even if we're far apart, we're close in heart this winter holiday.",
+          "Friendship celebration: Season's greetings, my friend. May your holidays sparkle as brightly as you do.",
+          "Adventure protocol: Wishing you a wonderful holiday and a happy New Year packed with adventure.",
+          "Laughter memory.exe: Happy holidays! May your holiday season bring endless laughter and new memories.",
+          "Old friends new beginnings: Here's to old friends, new beginnings, and the year ahead we'll share.",
+          "Ugly sweater algorithm: May all your sweaters be merry, ugly, and bright.",
+          "Favorite people scan: Sending warm wishes to one of my favorite people this wonderful holiday season.",
+          "Friendship toast: Let's raise a glass to friendship, laughter, and cookies.",
+          "Best gift protocol: Your friendship is the best gift – everything else is just wrapping.",
+          "Joy music love.exe: May this holiday season fill you with joy, your home with music, and your heart with love.",
+          "Laughs counter: Here's to a year filled with more laughs than we can count.",
+          "Dedication acknowledgment: Happy holidays! Your dedication has made this a successful year, thank you.",
+          "Inspiration opportunity: Wishing you a wonderful holiday season and a year ahead filled with inspiration and opportunity.",
+          "Hard work fuel: Your hard work fuels our success. Warmest holiday wishes from [Company Name].",
+          "Efforts matter: This holiday season, know that your efforts truly matter.",
+          "Together protocol: Here's to a joyous holiday season and another wonderful year together.",
+          "Support gratitude: Season's greetings from all of us at [Company Name]. Your continued support means the world.",
+          "Business year thanks: Thank you for a great business year. Here's to more success and new milestones in 2026.",
+          "Successes calculation: Wishing you a happy holiday season and many successes in 2026.",
+          "Prosperity joy growth: May the holiday season bring prosperity, joy, and growth to your business.",
+          "Trust gratitude: We're grateful for your trust over the past year. Happy holidays and best wishes for the New Year.",
+          "Joy persistence: May this season bring joy that lasts all year.",
+          "Blessed season protocol: Wishing you a blessed season and a time filled with peace.",
+          "Merry bright days: Happy Holidays! May your days be merry and bright.",
+          "Heart full protocol: May your heart be full of joy and gratitude.",
+          "Home to home transmission: From our home to yours, have a wonderful holiday season full of love.",
+          "Magical day.exe: May this season be as magical as you've dreamed.",
+          "Joys beyond: Wishing you all the joys of the season and beyond.",
+          "Cozy memories function: Hoping this season brings you cozy memories, festive cheer, and warmth.",
+          "Matter most protocol: Here's to a wonderful season with the people who matter most.",
+          "Lights guide: Let the lights of this season guide you to joy and peace.",
+          "Lights untangle: May your holiday lights untangle themselves this year.",
+          "Music preference: May the music of this season bring joy and serenity.",
+          "Gift cards easier: They say the best presents come from the heart – but gift cards are easier.",
+          "Winter red protocol: Wishing you a wonderful winter season, or a bottle of red.",
+          "Patience calculation: May your patience last longer than the store lines.",
+          "Nap request: All I want for this season is… a nap.",
+          "Cost calculation: It's beginning to cost a lot like the holidays.",
+          "Zero assembly: Sending you holiday joy – zero assembly required.",
+          "Late gift protocol: This year, I put so much thought into your gift that it's late.",
+          "Laughter chaos: Wishing you more laughter than chaos in the living room during the holidays."
+        ]
+  }
+};
+
+    // State management
+    let currentLang = 'it';
+    let currentGreeting = "";
+    let fade = true;
+    let copied = false;
+
+    // Initialize language based on browser
+    function initLanguage() {
+      const browserLang = navigator.language || navigator.userLanguage;
+      currentLang = browserLang.toLowerCase().startsWith('it') ? 'it' : 'en';
+      updateUI();
+    }
+
+    // Update UI with current language
+    function updateUI() {
+      const t = translations[currentLang];
+      document.getElementById('title').textContent = t.title;
+      document.getElementById('subtitle').textContent = t.subtitle;
+      document.getElementById('button-text').textContent = `[ ${t.button} ]`;
+      document.getElementById('copy-text').textContent = t.copyButton;
+      document.getElementById('footer-before').textContent = t.footerBefore;
+      document.getElementById('footer-after').textContent = t.footerAfter;
+      document.getElementById('lang-text').textContent = currentLang === 'it' ? 'EN' : 'IT';
+      // Regenerate greeting with new language
+      generateGreeting();
+    }
+
+    // Toggle language
+    function toggleLanguage() {
+      currentLang = currentLang === 'it' ? 'en' : 'it';
+      updateUI();
+    }
+
+    // Generate cyber snow effect
+    function createCyberSnow() {
+      const container = document.getElementById('snow-container');
+      const flakes = Array.from({ length: 40 }).map((_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+        animationDuration: Math.random() * 5 + 5 + 's',
+      animationDelay: Math.random() * 5 + 's',
+      opacity: Math.random() * 0.6 + 0.2,
+      size: Math.random() * 6 + 2 + 'px'
+      }));
+
+      flakes.forEach(flake => {
+        const flakeEl = document.createElement('div');
+        flakeEl.style.position = 'absolute';
+        flakeEl.style.left = `${flake.left}%`;
+        flakeEl.style.top = '-10px';
+        flakeEl.style.width = flake.size;
+        flakeEl.style.height = flake.size;
+        flakeEl.style.opacity = flake.opacity;
+        flakeEl.style.backgroundColor = 'rgba(6, 182, 212, 0.4)';
+        flakeEl.style.boxShadow = '0 0 5px cyan';
+        flakeEl.style.animation = `fall ${flake.animationDuration} linear infinite`;
+        flakeEl.style.animationDelay = flake.animationDelay;
+        container.appendChild(flakeEl);
+      });
+    }
+
+    // Generate greeting
+    function generateGreeting() {
+      fade = false;
+      const container = document.getElementById('greeting-container');
+      container.classList.remove('fade-in');
+      container.classList.add('fade-out');
+
+    setTimeout(() => {
+        const t = translations[currentLang];
+        const currentGreetingsList = t.greetings;
+      let newIndex;
+        
+      if (currentGreetingsList.length <= 1) {
+          currentGreeting = currentGreetingsList[0];
+      } else {
+        do {
+          newIndex = Math.floor(Math.random() * currentGreetingsList.length);
+        } while (currentGreetingsList[newIndex] === currentGreeting);
+          currentGreeting = currentGreetingsList[newIndex];
+        }
+
+        document.getElementById('greeting-text').textContent = currentGreeting;
+        
+        fade = true;
+        container.classList.remove('fade-out');
+        container.classList.add('fade-in');
+        
+        copied = false;
+        updateCopyButton();
+      }, 200);
+    }
+
+    // Copy to clipboard
+    async function copyToClipboard() {
+      try {
+        await navigator.clipboard.writeText(currentGreeting);
+        copied = true;
+        updateCopyButton();
+        setTimeout(() => {
+          copied = false;
+          updateCopyButton();
+        }, 2000);
+      } catch (err) {
+        // Fallback for older browsers
+    const textArea = document.createElement("textarea");
+    textArea.value = currentGreeting;
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand('copy');
+          copied = true;
+          updateCopyButton();
+          setTimeout(() => {
+            copied = false;
+            updateCopyButton();
+          }, 2000);
+    } catch (err) {
+          console.error(translations[currentLang].copyError, err);
+    }
+    document.body.removeChild(textArea);
+      }
+    }
+
+    // Update copy button state
+    function updateCopyButton() {
+      const btn = document.getElementById('copy-btn');
+      const text = document.getElementById('copy-text');
+      const t = translations[currentLang];
+      
+      if (copied) {
+        btn.classList.remove('text-cyan-300', 'border-cyan-700');
+        btn.classList.add('text-green-400', 'border-green-500');
+        text.textContent = t.copySuccess;
+      } else {
+        btn.classList.remove('text-green-400', 'border-green-500');
+        btn.classList.add('text-cyan-300', 'border-cyan-700');
+        text.textContent = t.copyButton;
+      }
+    }
+
+    // Share greeting
+    async function shareGreeting() {
+      const t = translations[currentLang];
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: t.shareTitle,
+          text: currentGreeting,
+        });
+      } catch (err) {
+          if (err.name !== 'AbortError') {
+        console.log(t.shareCancel);
+          }
+      }
+    } else {
+      copyToClipboard();
+    }
+    }
+
+    // Event listeners
+    document.getElementById('generate-btn').addEventListener('click', generateGreeting);
+    document.getElementById('copy-btn').addEventListener('click', copyToClipboard);
+    document.getElementById('share-btn').addEventListener('click', shareGreeting);
+    document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
+
+    // Initialize
+    initLanguage();
+    createCyberSnow();
+  </script>
+</body>
+</html>
